@@ -32,7 +32,8 @@ def main():
 
 	token = 'YOUR_TOKKEN'
 	
-	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': YOUR_ID,														'access_token': token, 
+	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': YOUR_ID,
+										'access_token': token, 
 										'need_system': 1,
 										'album_id': 'saved', #optional
 										'photo_sizes': 1})
