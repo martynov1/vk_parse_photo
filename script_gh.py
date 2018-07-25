@@ -1,6 +1,7 @@
 import requests
 import json
-
+import timeit
+import os
 
 def write_json(data):
 	with open('response.json', 'w', encoding='utf-8') as file:
@@ -14,7 +15,9 @@ def get_large(size_dict):
 		return size_dict['width']
 
 
-def download(url):
+def download(url):	
+	
+
 	r = requests.get(url, stream=True)
 	filename = url.split('/')[-1]
 	
@@ -24,21 +27,34 @@ def download(url):
 
 
 def main():
-	token = 'your_tokken'
+	start = timeit.default_timer()
 	
-	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': your_id,
-																			 'access_token': token, 
-																			 'need_system': 1,
-																			 'album_id': 'saved', #optional
-																			 'photo_sizes': 1})
+	token = 'YOUR_TOKKEN'
+	
+	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': YOUR_ID,
+																			'access_token': token, 
+																			'need_system': 1,
+																			'album_id': 'saved', #optional
+																			'photo_sizes': 1})
 	write_json(r.json())
-
+	
+	
 
 	images = json.load(open('response.json'))['response']['items']
+	count = json.load(open('response.json'))['response']['count']
+	
+	os.mkdir('.\images')
+	os.chdir('.\images')	
+	
 	for image in images:
 		sizes = image['sizes']
 		max_size_pic = max(sizes, key=get_large)['src']
 		download(max_size_pic)
+	
+	stop = timeit.default_timer()
+	
+	print('Load time: ', stop - start)
+	print('Download {} files'.format(count))
 
 
 if __name__ == '__main__':
