@@ -29,21 +29,14 @@ def download(url):
 def main():
 	start = timeit.default_timer()
 	
-<<<<<<< HEAD
+
 	token = 'YOUR_TOKKEN'
 	
-	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': YOUR_ID,
-																			'access_token': token, 
-																			'need_system': 1,
-																			'album_id': 'saved', #optional
-																			'photo_sizes': 1})
-=======
-	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': your_id,
-									        'access_token': token, 
-				                                		'need_system': 1,
+	r = requests.get('https://api.vk.com/method/photos.get?v=5.52', params={'owner_id': YOUR_ID,														'access_token': token, 
+										'need_system': 1,
 										'album_id': 'saved', #optional
 										'photo_sizes': 1})
->>>>>>> 79385f9c72b73a6e42becedaa8452f4c71053c66
+
 	write_json(r.json())
 	
 	
